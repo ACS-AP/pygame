@@ -25,7 +25,6 @@ class GameObject(pygame.sprite.Sprite):
 
 apple2 = GameObject(w / 2, 0, './images/apple.png')
 
-
 #3 Columns & Rows
 center = w / 2
 middle = center - 32
@@ -58,7 +57,6 @@ class Apple(GameObject):
   def reset(self):
     self.x = choice(x_lanes)
     self.y = -64
-
 
 class Strawberry(GameObject):
   def __init__(self):
