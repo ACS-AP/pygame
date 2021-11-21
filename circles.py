@@ -70,8 +70,8 @@ while running:
   #clear screen
   black = (0, 0, 0)
   screen.fill(black)
+  
   #draw_color_circles()
-
   draw_circle_grid()
 
   #update the display
