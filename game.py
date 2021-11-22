@@ -8,11 +8,7 @@ pygame.init()
 screen = pygame.display.set_mode([500, 500])
 myfont = pygame.font.SysFont('Comic Sans', 30)
 
-level_one = pygame.image.load('images/bg1.jpeg')
-level_two = pygame.image.load('images/bg2.jpeg')
-level_three = pygame.image.load('images/bg3.jpeg')
-level_four = pygame.image.load('images/bg4.jpeg')
-level_five = pygame.image.load('images/bg5.jpeg')
+bg1 = pygame.image.load('images/bg1.jpeg')
 
 clock = pygame.time.Clock()
 apple = Apple()
@@ -25,12 +21,12 @@ collected = 0
 running = True
 while running:
   screen.fill((0, 0, 0))
-  screen.blit(level_three, [0, 0])
-  # Looks at events
+  screen.blit(bg1, [0, 0])
+
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
       running = False
-    # Check for event type KEYBOARD
+
     elif event.type == pygame.KEYDOWN:
       if event.key == pygame.K_ESCAPE:
         running = False
@@ -76,7 +72,7 @@ while running:
       strawberry.reset()
       strawberry.dx = (randint(0, 200) / 100) + 1
       collected = 0
-      # running = False
+
 
     score_obj = myfont.render(f'Collected: {collected}', True, (0, 0, 0))
     screen.blit(score_obj, (25, 450))

@@ -9,9 +9,8 @@ while running:
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
       running = False
-
  
-  screen.fill((13, 17, 24))
+  screen.fill((0, 0, 0))
 
   for index in range(9):
 
@@ -22,7 +21,6 @@ while running:
 
     pygame.draw.circle(screen, color, position, 50)
     
-  # update display
   pygame.display.flip()
 
   
