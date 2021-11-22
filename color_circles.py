@@ -10,7 +10,7 @@ while running:
     if event.type == pygame.QUIT:
       running = False
 
-  screen.fill((200, 200, 200))
+  screen.fill((0, 0, 0))
 
   color = (255, 59, 48)
   position = (75, 75)
