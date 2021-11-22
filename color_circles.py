@@ -11,9 +11,8 @@ while running:
     if event.type == pygame.QUIT:
       running = False
 
-  # clear screen
   screen.fill((13, 17, 24))
-  # draw circles
+
   color = (255, 59, 48)
   position = (75, 75)
   pygame.draw.circle(screen, color, position, 75)

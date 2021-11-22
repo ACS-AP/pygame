@@ -1,6 +1,6 @@
 from game_object import GameObject
 
-# Player subclass of GameObject
+#Player Subclass GameObject
 class Player(GameObject):
   def __init__(self):
     super(Player, self).__init__(0, 0, 'images/player.png')

@@ -1,7 +1,7 @@
 from game_object import GameObject
 from random import randint, choice
 
-# Apple subclass of GameObject
+#Apple Subclass GameObject
 class Apple(GameObject):
   def __init__(self):
     super(Apple, self).__init__(0, 0, 'images/apple.png')
@@ -10,7 +10,6 @@ class Apple(GameObject):
     self.reset()
 
   def move(self):
-    # self.x += self.dx
     self.y += self.dy
 
     if self.y > 500:
@@ -22,7 +21,7 @@ class Apple(GameObject):
     self.x = choice(x_coordinates)
     self.y = choice(y_coordinates)
   
-# Strawberry subclass of GameObject
+#Strawberry Subclass GameObject
 class Strawberry(GameObject):
   def __init__(self):
     super(Strawberry, self).__init__(0, 0, 'images/strawberry.png')

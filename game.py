@@ -84,11 +84,10 @@ while running:
   pygame.display.flip()
   clock.tick(60)
 
-
 apple = Apple()
 strawberry = Strawberry()
 
-#player
+#Player Class
 class Player(GameObject):
   def __init__(self):
     super(Player, self).__init__(0, 0, './images/player.png')
@@ -134,14 +133,14 @@ class Player(GameObject):
 
 player = Player()
 
-#make a group
+#Group
 all_sprites = pygame.sprite.Group()
 
 all_sprites.add(player)
 all_sprites.add(apple)
 all_sprites.add(strawberry)
 
-#game loop
+#Game Loop
 running = True
 while running:
   for event in pygame.event.get():
@@ -167,8 +166,8 @@ while running:
     entity.move()
     entity.render(screen)
 
-  #update window
+  #Window Update
   pygame.display.flip()
-  #clock
+
   clock.tick(60)
 
