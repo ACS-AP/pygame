@@ -1,80 +1,89 @@
 import pygame
+from fruit import Apple, Strawberry
+from player import Player
+from bomb import Bomb
+from random import randint
+
 pygame.init()
-from random import randint, choice
+screen = pygame.display.set_mode([500, 500])
+myfont = pygame.font.SysFont('Comic Sans', 30)
+
+level_one = pygame.image.load('images/bg1.jpeg')
+level_two = pygame.image.load('images/bg2.jpeg')
+level_three = pygame.image.load('images/bg3.jpeg')
+level_four = pygame.image.load('images/bg4.jpeg')
+level_five = pygame.image.load('images/bg5.jpeg')
 
 clock = pygame.time.Clock()
+apple = Apple()
+strawberry = Strawberry()
+player = Player()
+bomb = Bomb()
+bomb2 = Bomb()
+collected = 0
 
-#configure the screen
-screen = pygame.display.set_mode([500, 500])
-w, h = pygame.display.get_surface().get_size()
-
-class GameObject(pygame.sprite.Sprite):
-  def __init__(self, x, y, image):
-    super(GameObject, self).__init__()
-
-    self.surf = pygame.image.load(image)
-    self.rect = self.surf.get_rect()
-    self.x = x
-    self.y = y
-    self.rect = self.surf.get_rect()
+running = True
+while running:
+  screen.fill((0, 0, 0))
+  screen.blit(level_three, [0, 0])
+  # Looks at events
+  for event in pygame.event.get():
+    if event.type == pygame.QUIT:
+      running = False
+    # Check for event type KEYBOARD
+    elif event.type == pygame.KEYDOWN:
+      if event.key == pygame.K_ESCAPE:
+        running = False
+      elif event.key == pygame.K_LEFT:
+        player.left()
+      elif event.key == pygame.K_RIGHT:
+        player.right()
+      elif event.key == pygame.K_UP:
+        player.up()
+      elif event.key == pygame.K_DOWN:
+        player.down()
   
-  def render(self, screen):
-    self.rect.x = self.x
-    self.rect.y = self.y
-    screen.blit(self.surf, (self.x, self.y))
+  all_sprites = pygame.sprite.Group()
+  all_sprites.add(player)
+  all_sprites.add(apple)
+  all_sprites.add(strawberry)
+  all_sprites.add(bomb)
 
-apple2 = GameObject(w / 2, 0, './images/apple.png')
+  fruit_sprites = pygame.sprite.Group()
+  fruit_sprites.add(apple)
+  fruit_sprites.add(strawberry)
 
-#3 Columns & Rows
-center = w / 2
-middle = center - 32
-left = center / 2 - 25
-right =  w - (center / 2) - 25
+  if collected == 2:
+    all_sprites.add(bomb2)
+    
+  for entity in all_sprites:
+    entity.move()
+    entity.render(screen)
 
-x_lanes = [left, middle, right]
+    fruit = pygame.sprite.spritecollideany(player, fruit_sprites, pygame.sprite.collide_rect_ratio(.85))
+    if fruit:
+      fruit.reset()
+      collected += 1
+      apple.dy += 0.05
+      strawberry.dx += 0.05
 
-center_horizontal = h / 2
-center_horizontal_lane = center_horizontal - 32
-top = center_horizontal / 2 - 25
-bottom = h - (center_horizontal / 2) - 25
+    if pygame.sprite.collide_rect_ratio(.85)(player, bomb):
+      bomb.reset()
+      player.dx = 220
+      player.dy = 220
+      apple.reset()
+      apple.dy = (randint(0, 200) / 100) + 1
+      strawberry.reset()
+      strawberry.dx = (randint(0, 200) / 100) + 1
+      collected = 0
+      # running = False
 
-y_lanes = [top, center_horizontal_lane, bottom]
+    score_obj = myfont.render(f'Collected: {collected}', True, (0, 0, 0))
+    screen.blit(score_obj, (25, 450))
 
-class Apple(GameObject):
-  def __init__(self):
-    self.x = choice(x_lanes)
-    super(Apple, self).__init__(0, 0, './images/apple.png')
-    self.dx = 0
-    self.dy = (randint(0, 200) / 100) + 1
-    self.reset()
+  pygame.display.flip()
+  clock.tick(60)
 
-  def move(self):
-    self.x += self.dx
-    self.y += self.dy
-    if self.y > h:
-      self.reset()
-
-  def reset(self):
-    self.x = choice(x_lanes)
-    self.y = -64
-
-class Strawberry(GameObject):
-  def __init__(self):
-    self.y = choice(y_lanes)
-    super(Strawberry, self).__init__(0, 0, './images/strawberry.png')
-    self.dy = 0
-    self.dx = (randint(0, 200) / 100) + 1
-    self.reset()
-
-  def move(self):
-    self.y += self.dy
-    self.x += self.dx
-    if self.x > w:
-      self.reset()
-  
-  def reset(self):
-    self.y = choice(y_lanes)
-    self.x = -64
 
 apple = Apple()
 strawberry = Strawberry()
