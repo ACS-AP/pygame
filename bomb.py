@@ -3,7 +3,7 @@ from random import randint, choice
 
 class Bomb(GameObject):
   def __init__(self):
-    super(Bomb, self).__init__(0, 0, 'src/images/bomb.png')
+    super(Bomb, self).__init__(0, 0, 'images/bomb.png')
     self.dx = (randint(0, 200) / 100) + 1
     self.dy = (randint(0, 200) / 100) + 1
     self.reset()

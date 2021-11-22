@@ -4,7 +4,7 @@ from random import randint, choice
 # Apple subclass of GameObject
 class Apple(GameObject):
   def __init__(self):
-    super(Apple, self).__init__(0, 0, 'src/images/apple.png')
+    super(Apple, self).__init__(0, 0, 'images/apple.png')
     self.dx = 0
     self.dy = (randint(0, 200) / 100) + 1
     self.reset()
@@ -25,7 +25,7 @@ class Apple(GameObject):
 # Strawberry subclass of GameObject
 class Strawberry(GameObject):
   def __init__(self):
-    super(Strawberry, self).__init__(0, 0, 'src/images/strawberry.png')
+    super(Strawberry, self).__init__(0, 0, 'images/strawberry.png')
     self.dx = (randint(0, 200) / 100) + 1
     self.dy = 0
     self.reset()
